@@ -1,74 +1,65 @@
 close all; clear;
 
-[x, Fs] = readfile('IQ_2short.wav');
+[x, Fs] = readfile('IQ_1pkt.wav');
 t = linspace(0,length(x)/Fs, length(x))';
+length(t)
 
 %offset = -250000;
-offset = -150000;
+offset = meanfreq(x,Fs);
 channelspacing = 200000;
 
+%%Tune signal
 
 s = exp(-1i * pi * 2 * offset * t);
 x = x .* s;
 
-%mySpectrogram(x,Fs,1028,0);
-
-spectrogram(x,1024)
-figure
+%spectrogram(x,1024)
+%%LPF and resample
 
 [b,a] = butter(4,2*channelspacing / Fs);
 x_f = filter(b,a,x);
-
 x_r = resample(x_f, 4*channelspacing, Fs);
+
 
 Fs2 = Fs /( Fs / (4*channelspacing))
 
+t2 = linspace(0,length(x_r)/Fs2, length(x_r))';
+%% get bits
 
-%mySpectrogram(x_r,Fs2,8,0);
+res = signaltobits(x_r,Fs2, 0.001);
 
-peak1 = fdesign.peak('N,F0,Q',2,channelspacing/Fs2,100);
-p1 = design(peak1,'SystemObject',true);
+%% Find Preamble
+preamblemask = [0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1];
+preamblepos = strfind(res, preamblemask)
 
-peak2 = fdesign.peak('N,F0,Q',2,-1*channelspacing/Fs2,100); 
-p2 = design(peak2,'SystemObject',true);
+preamblestart = preamblepos(1);
+preambleend = preamblepos(end) + length(preamblemask) - 1
 
-x1 = p1(x_r);
-x2 = p2(x_r);
+%plot(linspace(1,length(preamblematch)), preamblematch');
 
-t2 = linspace(0,length(x1)/Fs2, length(x1));
+%% Find sync word
+%sync code from si1000 datasheet & sik sourcecode
+syncword = [0 0 1 0 1 1 0 1 1 1 0 1 0 1 0 0];
+syncpos = strfind(res, syncword)
+headerstart = syncpos + length(syncword)
 
+%% dewhiten/decode data
+% lfsr reverse engineered from output with known cleartext
+lfsr = comm.PNSequence('Polynomial',[9 5 0], 'InitialConditions', [0 1 1 1 1 0 0 0 0], 'SamplesPerFrame',8);
+cursor = headerstart;
+header3 = bi2de(xor(res(cursor:cursor+7), lfsr.step()'),'left-msb')
+cursor = cursor + 8;
+header2 = bi2de(xor(res(cursor:cursor+7), lfsr.step()'),'left-msb')
+cursor = cursor + 8;
+packetlen = bi2de(xor(res(cursor:cursor+7), lfsr.step()'),'left-msb')
+cursor  = cursor +8;
 
-x3 = resample(x_r, Fs, 4*channelspacing);
-%plot(linspace(0,1,length(x3)),real(x3), linspace(0,1,length(x3)), imag(x3));
-%plot(linspace(0,1,length(x3)),atan2(imag(x3),real(x3)));
-%plot(t2,x_r)
-
-[u,i,o] = spectrogram(x_r,2);
-%mySpectrogram(x_r,Fs2, 3,0);
-
-%mySpectrogram(x2,Fs2, 258,0);
-
-y = abs(sum(u(1:120,:))) - abs(sum(u(135:256,:)));
-y_0 = [y 0];
-y_1 = [0 y];
-
-period = Fs2 / 128e3;
-crossings = sign(y_0) ~= sign(y_1) | y_0 == 0;
-positions = find(crossings);
-
-res = []
-for i = 1:length(positions)-1
-    length = positions(i+1) - positions(i);
-    bits = round(length / period,0);
-    res = [res ones(1,bits)*y(floor(mean(positions([i, i+1]))))>0];
+if( cursor + packetlen*8 > length(res))
+    print('packet size error');
 end
-    
 
-plot(t2,y_0./2)
-ylim([-10, 10]);
-
-%res = y(mod(t2(1:end-1).*128e3+0.4,1) <= 0.15) > 0;
-%figure;
-%plot(t,real(x_f),t,imag(x_f))
-
-
+data = reshape(res(cursor:cursor + packetlen*8 - 1),8, [])'
+bytes = zeros(0,size(data,1))
+for i = 1 : size(data,1)
+    bytes(i) = bi2de( xor(data(i,:),lfsr.step()'),'left-msb');
+end
