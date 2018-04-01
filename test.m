@@ -25,3 +25,5 @@ for i = 1:size(packets,1)
         bytes = decodepacket(x(packets(i,1):packets(i,2)),Fs)
     end
 end
+
+[res1, res2] = CRC16(bytes);
