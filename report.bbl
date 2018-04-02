@@ -1,0 +1,41 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.6 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \sortlist[entry]{nty/global}
+    \entry{4509719}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=51b13d5a35b1014371068d17600eeb6f}{%
+           family={Hovo},
+           family_i={H\bibinitperiod},
+           given={Luke},
+           given_i={L\bibinitperiod}}}%
+      }
+      \strng{namehash}{51b13d5a35b1014371068d17600eeb6f}
+      \strng{fullhash}{51b13d5a35b1014371068d17600eeb6f}
+      \field{sortinit}{H}
+      \field{sortinithash}{82012198d5dfa657b8c4a168793268a6}
+      \field{labelnamesource}{author}
+      \field{howpublished}{\url{https://github.com/RFDesign/SiK/releases}}
+      \field{year}{2014}
+    \endentry
+  \endsortlist
+\endrefsection
+\endinput
+

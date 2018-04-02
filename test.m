@@ -1,6 +1,7 @@
 close all; clear;
 
 [x, Fs] = readfile('IQ_2short.wav');
+%plot(1:length(x), real(x))
 haspacket = filtfilt(ones(1,4)./4,1,abs(x)) > 0.2;
 length(x)
 packets = [];

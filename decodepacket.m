@@ -30,7 +30,7 @@ t2 = linspace(0,length(x_r)/Fs2, length(x_r))';
 res = signaltobits(x_r,Fs2, 0.001);
 
 %% Find Preamble
-preamblemask = [0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1];
+preamblemask = [0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1]
 preamblepos = strfind(res, preamblemask)
 
 if(isempty(preamblepos))
