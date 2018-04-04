@@ -47,8 +47,8 @@ check2 = bytes(1:21);
 %  
 %  [one1 two2] = CRC16(check3)
  
- checkcrc = comm.CRCDetector('x^16+x^12+x^5+1', 'InitialConditions', [1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1]);
- gen = comm.CRCGenerator('x^16+x^12+x^5+1', 'InitialConditions', [1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1], 'DirectMethod', 0);
+ checkcrc = comm.CRCDetector([16 15 2 0], 'InitialConditions', [1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1]);
+ gen = comm.CRCGenerator('x^16+x^15+x^2+1', 'InitialConditions', [1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1], 'DirectMethod', 0);
  
  si = [99];
  si2 = transpose(si);
@@ -81,7 +81,7 @@ check2 = bytes(1:21);
  
  comp = step(gen, A);
 
- [~,err] = step(checkcrc, A)
+ [~,err] = step(checkcrc, AA)
  
  msg = randi([0 1],12,1)
  
