@@ -145,6 +145,13 @@ INPUT /home/bart/Documents/TU/Wireless Networking/git/rfd900-sdr/plots/Two_packe
 INPUT /home/bart/Documents/TU/Wireless Networking/git/rfd900-sdr/plots/Two_packets_signal.png
 OUTPUT /home/bart/Documents/TU/Wireless Networking/git/rfd900-sdr/report.pdf
 INPUT /home/bart/Documents/TU/Wireless Networking/git/rfd900-sdr/plots/Two_packets_signal.png
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmrc7t.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr8.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr6.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmmi8.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmmi6.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy8.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmr7t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
 INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
@@ -163,6 +170,8 @@ INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmr7t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmri7t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmri8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmr7t.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmrc7t.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
 INPUT /home/bart/Documents/TU/Wireless Networking/git/rfd900-sdr/report.aux
 INPUT /home/bart/Documents/TU/Wireless Networking/git/rfd900-sdr/report.run.xml
 OUTPUT /home/bart/Documents/TU/Wireless Networking/git/rfd900-sdr/report.run.xml

@@ -64,7 +64,38 @@ Finally a CRC check of the packet can be done, this code is ported directly from
 
 \section{Results}
 
-
+\begin{table}[h]
+\centering
+\caption{Decoded Packet}
+\label{tbl1}
+\begin{tabular}{lll}
+Byte & Meaning & Binary Value \\
+\hline
+0       & 98                          & 10000001  \\
+1       & 52                          & 00011111  \\
+2       & 67                          & 10000000   \\
+3       & 100                         & 10000001    \\
+4      & CRC fields                   & 00000000 \\
+5      & CRC fields                   & 00000000 \\
+6      & CRC fields                   & 00000000 \\
+7      & CRC fields                   & 11001111 \\
+8      & CRC fields                   & 11111111 \\
+9      & CRC fields                   & 11101010 \\
+10      & CRC fields                  & 11111111 \\
+11     & CRC fields                   & 11001110 \\
+12     & CRC fields                   & 00000000 \\
+13     & CRC fields                   & 11001111 \\
+14     & CRC fields                   & 00000000 \\
+15     & CRC fields                   & 00000000 \\
+16     & CRC fields                   & 00000000 \\
+17     & CRC fields                   & 11001110 \\
+18     & CRC fields                   & 00000000 \\
+19     & CRC fields                   & 10000010 \\
+20     & CRC fields                   & 11110111 \\
+21     & 8 bit CRC high value       & 01011111 \\
+22     & 8 bit CRC low value        & 10001001 \\
+\end{tabular}
+\end{table}
 
 \section{Discussion}
 

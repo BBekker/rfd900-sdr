@@ -60,6 +60,7 @@ cursor = cursor + 8;
 packetlen = bi2de(xor(res(cursor:cursor+7), lfsr.step()'),'left-msb')
 cursor  = cursor +8;
 
+
 if( cursor + packetlen*8 > length(res))
     print('packet size error');
 end
@@ -69,8 +70,6 @@ bytes = zeros(0,size(data,1));
 for i = 1 : size(data,1)
     bytes(i) = bi2de( xor(data(i,:),lfsr.step()'),'left-msb');
 end
-
-
 
 
 end

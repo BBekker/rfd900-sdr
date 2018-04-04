@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.2.27)  2 APR 2018 18:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.2.27)  3 APR 2018 13:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -798,15 +798,22 @@ Overfull \hbox (6.0pt too wide) in paragraph at lines 40--41
 [][] 
  []
 
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 71.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 71.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 71.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
  </home/bart/Documents/TU/Wireless Networking/git/rfd900-sdr/plots/Two_packets_
 signal.png (PNG copy)>]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 72.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 72.
+(Font)              <7> on input line 103.
 
 [2
 
@@ -816,20 +823,20 @@ Package logreq Info: Writing requests to 'report.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 8511 strings out of 493029
- 145145 string characters out of 6136234
- 550548 words of memory out of 5000000
- 11968 multiletter control sequences out of 15000+600000
- 34085 words of font info for 63 fonts, out of 8000000 for 9000
+ 8528 strings out of 493029
+ 145309 string characters out of 6136234
+ 554556 words of memory out of 5000000
+ 11978 multiletter control sequences out of 15000+600000
+ 37632 words of font info for 71 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 44i,5n,45p,824b,1409s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 44i,7n,45p,824b,1409s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fo
 nts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/
 times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.p
 fb>
 Output written on "/home/bart/Documents/TU/Wireless Networking/git/rfd900-sdr/r
-eport.pdf" (2 pages, 79828 bytes).
+eport.pdf" (2 pages, 80537 bytes).
 PDF statistics:
  29 PDF objects out of 1000 (max. 8388607)
  19 compressed objects within 1 object stream
