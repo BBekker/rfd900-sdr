@@ -72,18 +72,18 @@ for i = 1 : size(data,1)
 end
 
 %[high, low] = CRC16([header3 header2 packetlen bytes(1:end-2)])
-crc = crc16_2([header3 header2 packetlen bytes])
+%crc = crc16_2([header3 header2 packetlen bytes])
 
 
-checkcrc = comm.CRCDetector([16 15 2 0], 'InitialConditions', [1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1]);
+%checkcrc = comm.CRCDetector([16 15 2 0], 'InitialConditions', [1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1]);
 
-crcinput = [header3 header2 packetlen bytes]
-bits2 = arrayfun(@(x) dec2bin(x,8), crcinput,'UniformOutput',false)
-bits3 = cell2mat(bits2)
-bits4 = double(bits3(:)'-'0')
-A = transpose(bits4);
+%crcinput = [header3 header2 packetlen bytes]
+%bits2 = arrayfun(@(x) dec2bin(x,8), crcinput,'UniformOutput',false)
+%bits3 = cell2mat(bits2)
+%bits4 = double(bits3(:)'-'0')
+%A = transpose(bits4);
 
-[~,error] = step(checkcrc, A)
+%[~,error] = step(checkcrc, A)
 
 end
 
