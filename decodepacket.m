@@ -1,6 +1,6 @@
 function bytes = decodepacket(x,Fs)
 %DECODEPACKET Decode single packet IQ into bytes
-%   Detailed explanation goes here
+
     
 
 t = linspace(0,length(x)/Fs, length(x))';
@@ -22,7 +22,7 @@ x_f = filter(b,a,x);
 x_r = resample(x_f, 4*channelspacing, Fs);
 
 
-Fs2 = Fs /( Fs / (4*channelspacing))
+Fs2 = Fs /( Fs / (4*channelspacing));
 
 t2 = linspace(0,length(x_r)/Fs2, length(x_r))';
 %% get bits
