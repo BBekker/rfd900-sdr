@@ -1,6 +1,6 @@
 close all; clear;
 
-[x, Fs] = readfile('IQ_2short.wav');
+[x, Fs] = readfile('IQ_dataonly.wav');
 haspacket = filtfilt(ones(1,4)./4,1,abs(x)) > 0.2;
 length(x)
 packets = [];
@@ -25,5 +25,3 @@ for i = 1:size(packets,1)
         bytes = decodepacket(x(packets(i,1):packets(i,2)),Fs)
     end
 end
-
-[res1, res2] = CRC16(bytes);

@@ -2,7 +2,6 @@ function res = signaltobits(x,Fs, noisefloor)
 
 x = x(abs(x) > noisefloor*2);
 [u,i,o] = spectrogram(x,2);
-
 y = abs(sum(u(1:128,:))) - abs(sum(u(129:256,:)));
 y_0 = [y 0];
 y_1 = [0 y];

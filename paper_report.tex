@@ -1,0 +1,63 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[1in, top = 0.5in]{geometry}
+\usepackage{gensymb}
+\usepackage{filecontents}
+\usepackage{biblatex}
+\usepackage{titling}
+
+\begin{filecontents}{cite.bib}
+@inproceedings{iyer2016inter,
+  title={Inter-technology backscatter: Towards internet connectivity for implanted devices},
+  author={Iyer, Vikram and Talla, Vamsi and Kellogg, Bryce and Gollakota, Shyamnath and Smith, Joshua},
+  booktitle={Proceedings of the 2016 ACM SIGCOMM Conference},
+  pages={356--369},
+  year={2016},
+  organization={ACM}
+}
+\end{filecontents}
+\bibliography{cite}
+
+\title{ET4394: Paper Review}
+\author{Bernard Bekker \\ 4221656 \\ b.bekker@student.tudelft.nl \and Bart Rijnders \\ 4103505 \\ b.rijnders@student.tudelft.nl}
+
+\setlength{\droptitle}{-1cm}
+
+\date{April 2018}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+The paper reviewed is "Inter-technology backscatter: towards internet connectivity for implanted devices" \cite{iyer2016inter} which was presented at SIGCOMM 2016.
+The authors of the paper introduce a new technique for using backscatter communication they call "interscatter". The technique can use a Bluetooth signal to synthesize valid Wi-Fi 802.11b packets using backscatter.% Which is quite interesting and could have very useful applications in the future, especially for devices where power is an issue such as the implanted devices the paper talks about.
+%Er werd speciaal gezegt dat er geen marketing gelul in mocht staan.
+\section{Details}
+The authors use a Bluetooth transmitter to generate a constant tone by crafting a custom data payload that is a constant value (0 or 1) after data whitening. The packet is transmitted on the advertisement channel, which has a frequency very close to Wi-Fi channels.
+
+The device has to shift the Bluetooth signal to the frequency of a Wi-Fi channel. To prevent interference on other channels, the frequency shift is not allowed to have a mirror as would occur when modulating the signal using a on-off switch. Instead a complex signal must be generated which emulates I and Q terms. For this, two square waves are generated at a $90 \degree$ relative phase. They are used to modulate the real and complex parts of the backscatter circuit's impedance. The interference pattern will create a single shifted frequency. This frequency is then modulated with DBPSK or DQPSK using a similar technique.
+
+To allow communication back to the device, a terrible hack is used where the payload data of the OFDM symbols in a 802.11g packet are set such that the the amplitude of the signal in the time domain is modulated.
+
+\section{Review}
+Besides numerous grammatical errors and explanation of very basic concepts such as impedance that everyone already knows, other problems are identified while reading this paper:
+\begin{itemize}
+    \item
+    The claim that they are the first to use complex mixing in backscatter seems unbelievable. But we couldn't find any earlier papers using the same technique. Only later papers.
+    \item
+    The authors claim to have implementations on real hardware, which is great. However, no source is available to repeat the experiments.
+    \item
+    While the protocols used form a nice showcase of the fundamental backscatter technique, the practical use at this stage is much more limited than the introduction claims. While the device is able to interface with Bluetooth and Wi-Fi transceivers. It is not able to communicate using the protocols implemented on top of these transceivers.
+    \begin{itemize}
+        \item The Bluetooth device has to transmit packets that are not able to carry any data. 
+        \item The generated Wi-Fi packets are limited to a very short length between 38 and 209 bytes depending on the data rate. 34 bytes have to be used to construct a valid 802.11 packet, leaving not enough payload data for regular communication.
+        \item 
+        The Wi-Fi base station needs to specially modulate the data that is sent back.
+    \end{itemize}
+    
+\end{itemize}
+
+\printbibliography
+
+\end{document}

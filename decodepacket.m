@@ -30,8 +30,8 @@ t2 = linspace(0,length(x_r)/Fs2, length(x_r))';
 res = signaltobits(x_r,Fs2, 0.001);
 
 %% Find Preamble
-preamblemask = [0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1]
-preamblepos = strfind(res, preamblemask)
+preamblemask = [0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1];
+preamblepos = strfind(res, preamblemask);
 
 if(isempty(preamblepos))
     disp('no premable')
@@ -39,25 +39,25 @@ if(isempty(preamblepos))
     return
 end
 preamblestart = preamblepos(1);
-preambleend = preamblepos(end) + length(preamblemask) - 1
+preambleend = preamblepos(end) + length(preamblemask) - 1;
 
 %plot(linspace(1,length(preamblematch)), preamblematch');
 
 %% Find sync word
 %sync code from si1000 datasheet & sik sourcecode
 syncword = [0 0 1 0 1 1 0 1 1 1 0 1 0 1 0 0];
-syncpos = strfind(res, syncword)
-headerstart = syncpos + length(syncword)
+syncpos = strfind(res, syncword);
+headerstart = syncpos + length(syncword);
 
 %% dewhiten/decode data
 % lfsr reverse engineered from output with known cleartext
 lfsr = comm.PNSequence('Polynomial',[9 5 0], 'InitialConditions', [0 1 1 1 1 0 0 0 0], 'SamplesPerFrame',8);
 cursor = headerstart;
-header3 = bi2de(xor(res(cursor:cursor+7), lfsr.step()'),'left-msb')
+header3 = bi2de(xor(res(cursor:cursor+7), lfsr.step()'),'left-msb');
 cursor = cursor + 8;
-header2 = bi2de(xor(res(cursor:cursor+7), lfsr.step()'),'left-msb')
+header2 = bi2de(xor(res(cursor:cursor+7), lfsr.step()'),'left-msb');
 cursor = cursor + 8;
-packetlen = bi2de(xor(res(cursor:cursor+7), lfsr.step()'),'left-msb')
+packetlen = bi2de(xor(res(cursor:cursor+7), lfsr.step()'),'left-msb');
 cursor  = cursor +8;
 
 
@@ -71,6 +71,8 @@ for i = 1 : size(data,1)
     bytes(i) = bi2de( xor(data(i,:),lfsr.step()'),'left-msb');
 end
 
+%[high, low] = CRC16([header3 header2 packetlen bytes(1:end-2)])
+crc = crc16_2([header3 header2 packetlen bytes])
 
 end
 

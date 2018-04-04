@@ -63,8 +63,8 @@ table2 = reshape(A2,[1, 256]);
 %% calculating CRC values
 
 k = intmin('uint8');
-low = intmin('uint8');
-high = intmin('uint8');
+low = intmax('uint8');
+high = intmax('uint8');
 
 for i = 1:length(data)
     b = data(i);
